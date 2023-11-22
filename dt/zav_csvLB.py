@@ -41,7 +41,7 @@ def car_init():
 
 
 def car_run(x, y, h):
-    cmd = '<Set entity="player" name="vr"><PosInertial x="%s" y="%s" z="0" hDeg="%s" pDeg="0" rDeg="0" /></Set>'
+    cmd = '<Set entity="player" name="vr"><PosInertial x="%s" y="%s" z="0" hDeg="%s" pDeg="0" rDeg="0" /><Speed value="%s" /></Set>'
     cmd = cmd % (x, y, h)
     scp_tools(cmd)
 
@@ -53,7 +53,7 @@ def wgs2tm(lon, lat):
 
 
 def message2terminal():
-    
+    <Query entity="palyer" name=""> <PosInertial /><Speed /></Query>
 
 
 
@@ -76,7 +76,7 @@ def load_csv(filepath):
             y=cos_value*dist
             # x = float(r[0]) - 37272
             # y = float(r[1]) + 22529
-            car_run(x, y, 0)
+            car_run(x, y, modify_angle,speed)
             sleep(100)
 
 
