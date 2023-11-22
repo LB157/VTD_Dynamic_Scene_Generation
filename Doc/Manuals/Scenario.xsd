@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Definition of simple types -->
+
+    <xs:simpleType name="posDouble_t">
+        <xs:restriction base="xs:double">
+            <xs:minInclusive value="0.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="zeroToOne_t">
+        <xs:restriction base="xs:double">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="1.0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="angle_t">
+        <xs:restriction base="xs:double">
+            <xs:minInclusive value="0.0"/>
+            <xs:maxInclusive value="6.283185307179586477"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="dir_t">
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="-1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="stringNotEmpty_t">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="counterOp_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INC"/>
+            <xs:enumeration value="DEC"/>
+            <xs:enumeration value="SET"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="wheelDrive_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="wheel_drive_front"/>
+            <xs:enumeration value="wheel_drive_rear"/>
+            <xs:enumeration value="wheel_drive_all"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="engineType_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="engine_type_otto"/>
+            <xs:enumeration value="engine_type_diesel"/>
+            <xs:enumeration value="engine_type_electric"/>
+            <xs:enumeration value="engine_type_wankel"/>
+            <xs:enumeration value="engine_type_hybrid"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="vehicleClass_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="car"/>
+            <xs:enumeration value="van"/>
+            <xs:enumeration value="bus"/>
+            <xs:enumeration value="truck"/>
+            <xs:enumeration value="bike"/>
+            <xs:enumeration value="motorbike"/>
+            <xs:enumeration value="pedestrian"/>
+            <xs:enumeration value="opt1"/>
+            <xs:enumeration value="opt2"/>
+            <xs:enumeration value="opt3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="playerControl_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="external"/>
+            <xs:enumeration value="internal"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pathOption_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="classic"/>
+            <xs:enumeration value="shortest"/>
+            <xs:enumeration value="fastest"/>
+            <xs:enumeration value="fewestJunctions"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="endAction_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="loop"/>
+            <xs:enumeration value="stop"/>
+            <xs:enumeration value="continue"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="shapeType_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="spline"/>
+            <xs:enumeration value="clothoid"/>
+            <xs:enumeration value="polyline"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="counterComp_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COMP_EQ"/>
+            <xs:enumeration value="COMP_LT"/>
+            <xs:enumeration value="COMP_LE"/>
+            <xs:enumeration value="COMP_GT"/>
+            <xs:enumeration value="COMP_GE"/>
+            <xs:enumeration value="COMP_NE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="controllerPhase_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="off" />
+            <xs:enumeration value="stop" />
+            <xs:enumeration value="stop_attention" />
+            <xs:enumeration value="attention" />
+            <xs:enumeration value="go" />
+            <xs:enumeration value="go_exclusive" />
+            <xs:enumeration value="blink" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="hexNumber8_t">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(0x)?[0-9A-Fa-f]{8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="objectType_t">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="obstacle" />
+            <xs:enumeration value="sign" />
+            <xs:enumeration value="pole" />
+            <xs:enumeration value="vegetation" />
+            <xs:enumeration value="tree" />
+            <xs:enumeration value="barrier" />
+            <xs:enumeration value="street light" />
+            <xs:enumeration value="traffic sign" />
+            <xs:enumeration value="building" />
+            <xs:enumeration value="parking space" />
+            <xs:enumeration value="road works" />
+            <xs:enumeration value="road" />
+            <xs:enumeration value="misc motorway" />
+            <xs:enumeration value="misc town" />
+            <xs:enumeration value="patch" />
+            <xs:enumeration value="other" />            
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- Definition of complex types -->
+
+    <xs:complexType name="VehicleDef_t">
+        <xs:attribute name="Name" type="stringNotEmpty_t" />
+        <xs:attribute name="Class" type="vehicleClass_t" />
+        <xs:attribute name="MaxSpeed" type="posDouble_t" />
+        <xs:attribute name="EnginePower" type="posDouble_t" />
+        <xs:attribute name="MaxDecel" type="posDouble_t" />
+        <xs:attribute name="MaxSteering" type="posDouble_t" />
+        <xs:attribute name="Mass" type="posDouble_t" />
+        <xs:attribute name="FrontSurfaceEffective" type="posDouble_t" />
+        <xs:attribute name="AirDragCoefficient" type="posDouble_t" />
+        <xs:attribute name="RollingResistance" type="posDouble_t" />
+        <xs:attribute name="WheelDiameter" type="posDouble_t" />
+        <xs:attribute name="WheelDiameterDynamic" type="posDouble_t" />
+        <xs:attribute name="WheelDrive" type="wheelDrive_t" />
+        <xs:attribute name="OverallEfficiency" type="zeroToOne_t" />
+        <xs:attribute name="DistFront" type="posDouble_t" />
+        <xs:attribute name="DistRear" type="posDouble_t" />
+        <xs:attribute name="DistLeft" type="posDouble_t" />
+        <xs:attribute name="DistRight" type="posDouble_t" />
+        <xs:attribute name="DistHeight" type="posDouble_t" />
+        <xs:attribute name="WheelBase" type="posDouble_t" />
+        <xs:attribute name="Swarm" type="xs:unsignedInt" />
+        <xs:attribute name="DriveChainEfficiency" type="zeroToOne_t" />
+        <xs:attribute name="MaxTorque" type="posDouble_t" />
+        <xs:attribute name="WheelSkewStiffness" type="posDouble_t" />
+        <xs:attribute name="EngineType" type="engineType_t" />
+        <xs:attribute name="GradientPitchAngle" type="xs:double" />
+        <xs:attribute name="GradientRollAngle" type="xs:double" />
+    </xs:complexType>
+
+    <xs:complexType name="DriverDef_t">
+        <xs:attribute name="Name" type="stringNotEmpty_t" />
+        <xs:attribute name="LaneKeeping" type="zeroToOne_t" />
+        <xs:attribute name="SteeringDistance" type="zeroToOne_t" />
+        <xs:attribute name="RespondToTailgatingVehicles" type="zeroToOne_t" />
+        <xs:attribute name="DesiredVelocity" type="zeroToOne_t" />
+        <xs:attribute name="UrgeToOvertake" type="zeroToOne_t" />
+        <xs:attribute name="ObserveSpeedLimits" type="zeroToOne_t" />
+        <xs:attribute name="DesiredAcceleration" type="zeroToOne_t" />
+        <xs:attribute name="ConsiderEnvConditions" type="zeroToOne_t" />
+        <xs:attribute name="LaneChangingDynamic" type="zeroToOne_t" />
+        <xs:attribute name="ObserveKeepRightRule" type="zeroToOne_t" />
+        <xs:attribute name="UseOfTurnSignalLever" type="zeroToOne_t" />
+        <xs:attribute name="ForesightDistance" type="zeroToOne_t" />
+        <xs:attribute name="DistanceKeeping" type="zeroToOne_t" />
+        <xs:attribute name="CurveBehavior" type="zeroToOne_t" />
+        <xs:attribute name="SpeedKeeping" type="zeroToOne_t" />
+        <xs:attribute name="DesiredDeceleration" type="zeroToOne_t" />
+        <xs:attribute name="ReactionTime" type="zeroToOne_t" />
+        <xs:attribute name="ObeyTrafficSigns" type="zeroToOne_t" />
+        <xs:attribute name="ObeyTrafficLights" type="zeroToOne_t" />
+        <xs:attribute name="ObeyTrafficRules" type="zeroToOne_t" />
+        <xs:attribute name="Swarm" type="xs:unsignedInt" />
+    </xs:complexType>
+
+    <xs:complexType name="PulkDef_t">
+        <xs:attribute name="CentralPlayer" type="xs:string" />
+        <xs:attribute name="SemiMajorAxis" type="posDouble_t" />
+        <xs:attribute name="SemiMinorAxis" type="posDouble_t" />
+        <xs:attribute name="InnerRadius" type="posDouble_t" />
+        <xs:attribute name="CenterOffset" type="xs:double" />
+        <xs:attribute name="Count" type="xs:unsignedInt" />
+        <xs:attribute name="OwnSide" type="zeroToOne_t" />
+        <xs:attribute name="FillAtStart" type="xs:boolean" />
+        <xs:attribute name="Cars" type="zeroToOne_t" />
+        <xs:attribute name="Vans" type="zeroToOne_t" />
+        <xs:attribute name="Buses" type="zeroToOne_t" />
+        <xs:attribute name="Trucks" type="zeroToOne_t" />
+        <xs:attribute name="Bikes" type="zeroToOne_t" />
+        <xs:attribute name="AreaF" type="zeroToOne_t" />
+        <xs:attribute name="AreaB" type="zeroToOne_t" />
+        <xs:attribute name="AreaL" type="zeroToOne_t" />
+        <xs:attribute name="AreaR" type="zeroToOne_t" />
+        <xs:attribute name="VisibleInArea" type="xs:int" />
+    </xs:complexType>
+
+
+    <xs:complexType name="WaypointRoute_t">
+        <xs:sequence>
+            <xs:element name="Annotation" minOccurs="0" maxOccurs="1" type="Annotation_t" />
+        </xs:sequence>
+        <xs:attribute name="TrackId" type="xs:unsignedInt" />
+        <xs:attribute name="s" type="posDouble_t" />
+        <xs:attribute name="PathOption" type="pathOption_t" />
+    </xs:complexType>
+
+    <xs:complexType name="WaypointShape_t">
+        <xs:sequence>
+            <xs:element name="Annotation" minOccurs="0" maxOccurs="1" type="Annotation_t" />
+        </xs:sequence>
+        <xs:attribute name="X" type="xs:double" />
+        <xs:attribute name="Y" type="xs:double" />
+        <xs:attribute name="Z" type="xs:double" />
+        <xs:attribute name="Yaw" type="xs:double" />
+        <xs:attribute name="Pitch" type="xs:double" />
+        <xs:attribute name="Roll" type="xs:double" />
+        <xs:attribute name="Weight" type="posDouble_t" />
+        <xs:attribute name="Options" type="hexNumber8_t" />
+    </xs:complexType>
+
+
+    <xs:complexType name="EditorPos_t">
+        <xs:attribute name="X" type="xs:double" />
+        <xs:attribute name="Y" type="xs:double" />
+        <xs:attribute name="Direction" type="angle_t" />
+        <xs:attribute name="Radius" type="posDouble_t" />
+    </xs:complexType>
+
+    <xs:complexType name="PosAbsolute_t">
+        <xs:attribute name="X" type="xs:double" />
+        <xs:attribute name="Y" type="xs:double" />
+        <xs:attribute name="Z" type="xs:double" />
+        <xs:attribute name="Direction" type="angle_t" />
+    </xs:complexType>
+
+    <xs:complexType name="PosAbsolutePlayer_t">
+        <xs:complexContent>
+            <xs:extension base="PosAbsolute_t">
+                <xs:attribute name="AlignToRoad" type="xs:boolean" />
+                <xs:attribute name="PermanentLaneOffset" type="xs:double" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PosAbsoluteObject_t">
+        <xs:complexContent>
+            <xs:extension base="PosAbsolute_t">
+                <xs:attribute name="Pitch" type="angle_t" />
+                <xs:attribute name="Roll" type="angle_t" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PosRelativePlayer_t">
+        <xs:attribute name="Pivot" type="stringNotEmpty_t" />
+        <xs:attribute name="Distance" type="xs:double" />
+        <xs:attribute name="Lane" type="xs:int" />
+        <xs:attribute name="t" type="xs:double" />
+        <xs:attribute name="Orientation" type="dir_t" />
+    </xs:complexType>
+
+    <xs:complexType name="PathRef_t">
+        <xs:attribute name="PathId" type="xs:unsignedInt" />
+        <xs:attribute name="StartLane" type="xs:int" />
+        <xs:attribute name="StartS" type="posDouble_t" />
+        <xs:attribute name="TargetS" type="posDouble_t" />
+        <xs:attribute name="EndAction" type="endAction_t" />
+        <xs:attribute name="EditorTargetX" type="xs:double" />
+        <xs:attribute name="EditorTargetY" type="xs:double" />
+    </xs:complexType>
+    
+    <xs:complexType name="PathShapeRef_t">
+        <xs:attribute name="PathShapeId" type="xs:unsignedInt" />
+        <xs:attribute name="StartS" type="posDouble_t" />
+        <xs:attribute name="TargetS" type="posDouble_t" />
+        <xs:attribute name="EndAction" type="endAction_t" />
+    </xs:complexType>
+
+
+    <xs:complexType name="TriggerBase_t">
+        <xs:attribute name="CounterID" type="xs:string" />
+        <xs:attribute name="CounterComp" type="counterComp_t" />
+        <xs:attribute name="CounterVal" type="xs:int" />
+        <xs:attribute name="NetDist" type="xs:boolean" />
+    </xs:complexType>
+
+    <xs:complexType name="PosAbsoluteAction_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="X" type="xs:double" />
+                <xs:attribute name="Y" type="xs:double" />
+                <xs:attribute name="Radius" type="posDouble_t" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="Selection" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PosRelativeAction_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="Distance" type="xs:double" />
+                <xs:attribute name="Lane" type="xs:int" />
+                <xs:attribute name="t" type="xs:double" />
+                <xs:attribute name="Orientation" type="dir_t" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="Selection" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="PosTrack_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="Track" type="xs:unsignedInt" />
+                <xs:attribute name="Lane" type="xs:int" />
+                <xs:attribute name="s" type="posDouble_t" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="Selection" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TTCInertial_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="X" type="xs:double" />
+                <xs:attribute name="Y" type="xs:double" />
+                <xs:attribute name="TTC" type="xs:double" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="Selection" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="TTCRelative_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="TTC" type="xs:double" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="Selection" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="THRelative_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="TH" type="xs:double" />
+                <xs:attribute name="X" type="xs:double" />
+                <xs:attribute name="Y" type="xs:double" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="Radius" type="xs:double" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpeedAbsolute_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="Value" type="xs:double" />
+                <xs:attribute name="Pivot" type="xs:string" />
+                <xs:attribute name="OnExcess" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ExternalTrigger_t">
+        <xs:complexContent>
+            <xs:extension base="TriggerBase_t">
+                <xs:attribute name="Identifier" type="stringNotEmpty_t" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ActionBase_t">
+        <xs:attribute name="DelayTime" type="posDouble_t" />
+        <xs:attribute name="ActiveOnEnter" type="xs:boolean" />
+        <xs:attribute name="ExecutionTimes" type="xs:int" />
+    </xs:complexType>
+
+    <xs:complexType name="LaneChange_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="Direction" type="xs:int" />
+                <xs:attribute name="Type" type="xs:string" />
+                <xs:attribute name="Time" type="posDouble_t" />
+                <xs:attribute name="Force" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpeedChange_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="Rate" type="posDouble_t" />
+                <xs:attribute name="Target" type="xs:double" />
+                <xs:attribute name="Force" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Counter_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="CounterID" type="stringNotEmpty_t" />
+                <xs:attribute name="Value" type="xs:int" />
+                <xs:attribute name="Op" type="counterOp_t" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Autonomous_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="Force" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SCP_t">
+        <xs:complexContent mixed="true">
+            <xs:extension base="ActionBase_t" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Gesture_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="GestureType" type="stringNotEmpty_t" />
+                <xs:attribute name="Repeat" type="xs:unsignedInt" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Motion_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="Move" type="xs:string" />
+                <xs:attribute name="Speed" type="xs:double" />
+                <xs:attribute name="Rate" type="posDouble_t" />
+                <xs:attribute name="Force" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CharacterPath_t">
+        <xs:complexContent>
+            <xs:extension base="ActionBase_t">
+                <xs:attribute name="PathShape" type="xs:unsignedInt" />
+                <xs:attribute name="Loop" type="xs:boolean" />
+                <xs:attribute name="Beam" type="xs:boolean" />
+                <xs:attribute name="ClampToGround" type="xs:boolean" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="Scaling_t">
+        <xs:attribute name="X" type="posDouble_t" />
+        <xs:attribute name="Y" type="posDouble_t" />
+        <xs:attribute name="Z" type="posDouble_t" />
+    </xs:complexType>
+
+    <xs:complexType name="Annotation_t">
+        <xs:simpleContent>
+            <xs:extension base="stringNotEmpty_t" />
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+    <!-- more complex types -->
+
+    <xs:complexType name="Action_t">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="PosAbsolute" minOccurs="1" maxOccurs="1" type="PosAbsoluteAction_t" />
+                <xs:element name="PosRelative" minOccurs="1" maxOccurs="1" type="PosRelativeAction_t" />
+                <xs:element name="PosTrack" minOccurs="1" maxOccurs="1" type="PosTrack_t" />
+                <xs:element name="ExternalTrigger" minOccurs="1" maxOccurs="1" type="ExternalTrigger_t" />
+                <xs:element name="TTCInertial" minOccurs="1" maxOccurs="1" type="TTCInertial_t" />
+                <xs:element name="TTCRelative" minOccurs="1" maxOccurs="1" type="TTCRelative_t" />
+                <xs:element name="THRelative" minOccurs="1" maxOccurs="1" type="THRelative_t" />
+                <xs:element name="Speed" minOccurs="1" maxOccurs="1" type="SpeedAbsolute_t" />
+            </xs:choice>
+            <xs:element name="EditorPos" minOccurs="0" maxOccurs="1" type="EditorPos_t" />
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="SpeedChange" type="SpeedChange_t" />
+                <xs:element name="LaneChange" type="LaneChange_t" />
+                <xs:element name="Autonomous" type="Autonomous_t" />
+                <xs:element name="Gesture" type="Gesture_t" />
+                <xs:element name="Motion" type="Motion_t" />
+                <xs:element name="CharacterPath" type="CharacterPath_t" />
+                <xs:element name="Counter" type="Counter_t" />
+                <xs:element name="SCP" type="SCP_t" />
+            </xs:choice>
+            <xs:element name="Annotation" minOccurs="0" maxOccurs="1" type="Annotation_t" />
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="TrafficControl_t">
+        <xs:sequence>
+            <xs:element name="Path" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Waypoint" minOccurs="2" maxOccurs="unbounded" type="WaypointRoute_t" />
+                    </xs:sequence>
+                    <xs:attribute name="Name" type="stringNotEmpty_t" />
+                    <xs:attribute name="PathId" type="xs:unsignedInt" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Player" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Description" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                                <xs:attribute name="Name" type="stringNotEmpty_t" />
+                                <xs:attribute name="Type" type="stringNotEmpty_t" />
+                                <xs:attribute name="Driver" type="stringNotEmpty_t" />
+                                <xs:attribute name="AdaptDriverToVehicleType"  type="xs:boolean" />
+                                <xs:attribute name="Control" type="playerControl_t" />
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Init" minOccurs="1" maxOccurs="1">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Speed" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                            <xs:attribute name="Value" type="posDouble_t" />
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:choice>
+                                        <xs:element name="PosAbsolute" minOccurs="1" maxOccurs="1" type="PosAbsolutePlayer_t" />
+                                        <xs:element name="PosRelative" minOccurs="1" maxOccurs="1" type="PosRelativePlayer_t" />
+                                        <xs:element name="PosRoute" minOccurs="1" maxOccurs="1" />
+                                        <xs:element name="PosPathShape" minOccurs="1" maxOccurs="1" />
+                                        <xs:element name="PosTrack" minOccurs="1" maxOccurs="1" type="PosTrack_t" />
+                                    </xs:choice>
+                                    <xs:element name="EditorPos" minOccurs="0" maxOccurs="1" type="EditorPos_t" />
+                                    <xs:element name="PathRef" minOccurs="0" maxOccurs="unbounded" type="PathRef_t" />
+                                    <xs:element name="PathShapeRef" minOccurs="0" maxOccurs="unbounded" type="PathShapeRef_t" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Annotation" minOccurs="0" maxOccurs="1" type="Annotation_t" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PlayerActions" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="Action_t" />
+                    </xs:sequence>
+                    <xs:attribute name="Player" type="xs:string" />
+                    <xs:attribute name="Selection" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MovingObjectsControl_t">
+        <xs:sequence>
+            <xs:element name="PathShape" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Waypoint" minOccurs="2" maxOccurs="unbounded" type="WaypointShape_t" />
+                    </xs:sequence>
+                    <xs:attribute name="ShapeId" type="xs:unsignedInt" />
+                    <xs:attribute name="Name" type="stringNotEmpty_t" />
+                    <xs:attribute name="ShapeType" type="shapeType_t" />
+                    <xs:attribute name="Closed" type="xs:boolean" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Character" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="StartPosAbs" minOccurs="1" maxOccurs="1" type="PosAbsolute_t" />
+                        <xs:element name="Annotation" minOccurs="0" maxOccurs="1" type="Annotation_t" />
+                    </xs:sequence>
+                    <xs:attribute name="Name" type="stringNotEmpty_t" />
+                    <xs:attribute name="CharacterType" type="xs:string" />
+                    <xs:attribute name="Appearance" type="xs:string" />
+                    <xs:attribute name="Class" type="vehicleClass_t" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CharacterActions" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="Action_t" />
+                    </xs:sequence>
+                    <xs:attribute name="Character" type="xs:string" />
+                    <xs:attribute name="Selection" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Object" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Scaling" minOccurs="0" maxOccurs="1" type="Scaling_t" />
+                        <xs:element name="StartPosAbs" minOccurs="1" maxOccurs="1" type="PosAbsoluteObject_t" />
+                        <xs:element name="Annotation" minOccurs="0" maxOccurs="1" type="Annotation_t" />
+                    </xs:sequence>
+                    <xs:attribute name="Name" type="stringNotEmpty_t" />
+                    <xs:attribute name="Definition" type="stringNotEmpty_t" />
+                    <xs:attribute name="Type" type="objectType_t" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ObjectActions" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Action" minOccurs="0" maxOccurs="unbounded" type="Action_t" />
+                    </xs:sequence>
+                    <xs:attribute name="Object" type="xs:string" />
+                    <xs:attribute name="Selection" type="xs:string" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="LightSigns_t">
+        <xs:sequence>
+            <xs:element name="SignalController" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Phase" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="Duration" type="posDouble_t" />
+                                <xs:attribute name="Type" type="controllerPhase_t" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="Id" type="xs:unsignedInt" />
+                    <xs:attribute name="DelayRef" type="xs:int" />
+                    <xs:attribute name="Delay" type="posDouble_t" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Signal" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Lights" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="LightMask" type="hexNumber8_t" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="Id" type="xs:unsignedInt" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SelectionElements_t">
+      <xs:sequence>
+        <xs:element name="SelectionElement" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="Name" type="stringNotEmpty_t" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Selections_t">
+        <xs:sequence>
+            <xs:element name="Selection" minOccurs="0" maxOccurs="unbounded" >
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SelectionElements" type="SelectionElements_t" />
+                  </xs:sequence>
+                  <xs:attribute name="Name" type="stringNotEmpty_t" />
+                  <xs:attribute name="SelectionType" type="xs:unsignedInt" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Definition of root -->
+
+    <xs:element name="Scenario">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Layout">
+                    <xs:complexType>
+                        <xs:attribute name="Database" type="stringNotEmpty_t" />
+                        <xs:attribute name="File" type="stringNotEmpty_t" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="VehicleList">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="VehicleDef" minOccurs="0" maxOccurs="unbounded" type="VehicleDef_t" />
+                        </xs:sequence>
+                        <xs:attribute name="ConfigFile" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DriverList">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="DriverDef" minOccurs="0" maxOccurs="unbounded" type="DriverDef_t" />
+                        </xs:sequence>
+                        <xs:attribute name="ConfigFile" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CharacterList">
+                    <xs:complexType>
+                        <xs:attribute name="ConfigFile" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ObjectList">
+                    <xs:complexType>
+                        <xs:attribute name="ConfigFile" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TrafficElements">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="LaneChangeDef" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:attribute name="Name" type="stringNotEmpty_t" />
+                                    <xs:attribute name="Time" type="posDouble_t" />
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="CounterDef" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:attribute name="Name" type="stringNotEmpty_t" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PulkTraffic">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PulkDef" minOccurs="0" maxOccurs="unbounded" type="PulkDef_t" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TrafficControl" type="TrafficControl_t" />
+                <xs:element name="MovingObjectsControl" type="MovingObjectsControl_t" />
+                <xs:element name="LightSigns" type="LightSigns_t" />
+                <xs:element name="Selections" type="Selections_t" />
+            </xs:sequence>
+            <xs:attribute name="RevMajor" type="xs:unsignedInt" />
+            <xs:attribute name="RevMinor" type="xs:unsignedInt" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

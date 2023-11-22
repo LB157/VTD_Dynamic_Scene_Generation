@@ -1,0 +1,28 @@
+var group___e_n_u_m___d_e_f_i_n_i_t_i_o_n_s =
+[
+    [ "RDB_PKG_ID", "group___r_d_b___p_k_g___i_d.html", "group___r_d_b___p_k_g___i_d" ],
+    [ "RDB_PKG_ID_CUSTOM", "group___r_d_b___p_k_g___i_d___c_u_s_t_o_m.html", "group___r_d_b___p_k_g___i_d___c_u_s_t_o_m" ],
+    [ "RDB_OBJECT_CATEGORY", "group___r_d_b___o_b_j_e_c_t___c_a_t_e_g_o_r_y.html", "group___r_d_b___o_b_j_e_c_t___c_a_t_e_g_o_r_y" ],
+    [ "RDB_OBJECT_TYPE", "group___r_d_b___o_b_j_e_c_t___t_y_p_e.html", "group___r_d_b___o_b_j_e_c_t___t_y_p_e" ],
+    [ "RDB_LANE_BORDER", "group___r_d_b___l_a_n_e___b_o_r_d_e_r.html", "group___r_d_b___l_a_n_e___b_o_r_d_e_r" ],
+    [ "RDB_ROADMARK_TYPE", "group___r_d_b___r_o_a_d_m_a_r_k___t_y_p_e.html", "group___r_d_b___r_o_a_d_m_a_r_k___t_y_p_e" ],
+    [ "RDB_ROADMARK_COLOR", "group___r_d_b___r_o_a_d_m_a_r_k___c_o_l_o_r.html", "group___r_d_b___r_o_a_d_m_a_r_k___c_o_l_o_r" ],
+    [ "RDB_WHEEL_ID", "group___r_d_b___w_h_e_e_l___i_d.html", "group___r_d_b___w_h_e_e_l___i_d" ],
+    [ "RDB_GEAR_BOX_TYPE", "group___r_d_b___g_e_a_r___b_o_x___t_y_p_e.html", "group___r_d_b___g_e_a_r___b_o_x___t_y_p_e" ],
+    [ "RDB_GEAR_BOX_POS", "group___r_d_b___g_e_a_r___b_o_x___p_o_s.html", "group___r_d_b___g_e_a_r___b_o_x___p_o_s" ],
+    [ "RDB_DRIVETRAIN_TYPE", "group___r_d_b___d_r_i_v_e_t_r_a_i_n___t_y_p_e.html", "group___r_d_b___d_r_i_v_e_t_r_a_i_n___t_y_p_e" ],
+    [ "RDB_PIX_FORMAT", "group___r_d_b___p_i_x___f_o_r_m_a_t.html", "group___r_d_b___p_i_x___f_o_r_m_a_t" ],
+    [ "RDB_PIX_FORMAT_CUSTOM", "group___r_d_b___p_i_x___f_o_r_m_a_t___c_u_s_t_o_m.html", "group___r_d_b___p_i_x___f_o_r_m_a_t___c_u_s_t_o_m" ],
+    [ "RDB_SENSOR_TYPE", "group___r_d_b___s_e_n_s_o_r___t_y_p_e.html", "group___r_d_b___s_e_n_s_o_r___t_y_p_e" ],
+    [ "RDB_TRLIGHT_PHASE", "group___r_d_b___t_r_l_i_g_h_t___p_h_a_s_e.html", "group___r_d_b___t_r_l_i_g_h_t___p_h_a_s_e" ],
+    [ "RDB_COORD_TYPE", "group___r_d_b___c_o_o_r_d___t_y_p_e.html", "group___r_d_b___c_o_o_r_d___t_y_p_e" ],
+    [ "RDB_ENV_CLOUD_STATE", "group___r_d_b___e_n_v___c_l_o_u_d___s_t_a_t_e.html", "group___r_d_b___e_n_v___c_l_o_u_d___s_t_a_t_e" ],
+    [ "RDB_FUNCTION_TYPE", "group___r_d_b___f_u_n_c_t_i_o_n___t_y_p_e.html", "group___r_d_b___f_u_n_c_t_i_o_n___t_y_p_e" ],
+    [ "RDB_ROAD_TYPE", "group___r_d_b___r_o_a_d___t_y_p_e.html", "group___r_d_b___r_o_a_d___t_y_p_e" ],
+    [ "RDB_DRIVER_SOURCE", "group___r_d_b___d_r_i_v_e_r___s_o_u_r_c_e.html", "group___r_d_b___d_r_i_v_e_r___s_o_u_r_c_e" ],
+    [ "RDB_SHM_SIZE", "group___r_d_b___s_h_m___s_i_z_e.html", "group___r_d_b___s_h_m___s_i_z_e" ],
+    [ "RDB_FREESPACE_STATE", "group___r_d_b___f_r_e_e_s_p_a_c_e___s_t_a_t_e.html", "group___r_d_b___f_r_e_e_s_p_a_c_e___s_t_a_t_e" ],
+    [ "RDB_DYN_EL_SCOPE", "group___r_d_b___d_y_n___e_l___s_c_o_p_e.html", "group___r_d_b___d_y_n___e_l___s_c_o_p_e" ],
+    [ "RDB_RAY_TYPE", "group___r_d_b___r_a_y___t_y_p_e.html", "group___r_d_b___r_a_y___t_y_p_e" ],
+    [ "RDB_UNIT", "group___r_d_b___u_n_i_t.html", "group___r_d_b___u_n_i_t" ]
+];
