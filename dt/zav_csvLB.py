@@ -40,9 +40,9 @@ def car_init():
     scp_tools(cmd)
 
 
-def car_run(x, y, h):
+def car_run(x, y, h, s):
     cmd = '<Set entity="player" name="vr"><PosInertial x="%s" y="%s" z="0" hDeg="%s" pDeg="0" rDeg="0" /><Speed value="%s" /></Set>'
-    cmd = cmd % (x, y, h)
+    cmd = cmd % (x, y, h, s)
     scp_tools(cmd)
 
 
@@ -63,6 +63,7 @@ def load_csv(filepath):
     Point2behind=0.858
     x0=250.157
     y0=152.084
+    nums=0
     x2ego=250.157
     y2ego=152.084+Point2front
     with open(filepath, encoding="utf-8-sig") as f:
@@ -89,7 +90,10 @@ def load_csv(filepath):
             # x = float(r[0]) - 37272
             # y = float(r[1]) + 22529
             car_run(x2player, y2player,rotate_angle,speed)
-            sleep(100)
+            nums+=1
+            if(nums>=4):
+                break
+            sleep(1)
 
 
 if __name__ == '__main__':
