@@ -53,11 +53,18 @@ def wgs2tm(lon, lat):
 
 
 def message2terminal():
-    <Query entity="palyer" name=""> <PosInertial /><Speed /></Query>
+    # <Query entity="palyer" name=""> <PosInertial /><Speed /></Query>
+    print('d')
 
 
 
 def load_csv(filepath):
+    Point2front=3.536
+    Point2behind=0.858
+    x0=250.157
+    y0=152.084
+    x2ego=250.157
+    y2ego=152.084+Point2front
     with open(filepath, encoding="utf-8-sig") as f:
         rows = csv.reader(f)
         for r in rows:
@@ -70,13 +77,18 @@ def load_csv(filepath):
             sin_value = math.sin(angle_in_radians)
             # 计算余弦值
             cos_value = math.cos(angle_in_radians)
-            # x0=
-            # y0=            
-            x=sin_value*dist
-            y=cos_value*dist
+
+            if(speed<=0):
+                rotate_angle=270-angle
+                dist_player=dist+Point2front
+            if(speed>0):
+                rotate_angle=90-angle
+                dist_player=dist+Point2behind  
+            x2player=x2ego+sin_value*dist_player
+            y2player=y2ego+cos_value*dist_player
             # x = float(r[0]) - 37272
             # y = float(r[1]) + 22529
-            car_run(x, y, modify_angle,speed)
+            car_run(x2player, y2player,rotate_angle,speed)
             sleep(100)
 
 
